@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, View, TextInput, Button } from "react-native";
+import { StyleSheet, View, TextInput, Button, Text } from "react-native";
 
 export default function App() {
   const [book, setBook] = useState([]);
@@ -12,7 +12,6 @@ export default function App() {
       .then((resposta) => resposta.json())
       .then((data) => {
         const products = data.hits;
-        console.log(products.title);
         setBook(products);
       });
   };
@@ -22,7 +21,7 @@ export default function App() {
       <StatusBar style="auto" />
 
       <View style={styles.title}>
-        <h1>Livraria do Torres</h1>
+        <Text>Livraria do Torres</Text>
       </View>
 
       <View style={styles.container}>
@@ -37,9 +36,11 @@ export default function App() {
 
       {book.map((books) => (
         <View style={styles.result}>
-          <li>Autor: {books.author}</li>
-          <li>Título: {books.title}</li>
-          <li>URL: {books.url}</li>
+          <Text>
+            Autor: {books.author}
+            Título: {books.title}
+            URL: {books.url}
+          </Text>
         </View>
       ))}
     </View>
@@ -48,7 +49,7 @@ export default function App() {
 
 const styles = StyleSheet.create({
   title: {
-    flex: 1,
+    marginTop: 50,
     alignItems: "center",
     justifyContent: "center",
   },
@@ -63,16 +64,14 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     textAlign: "center",
-    border: "solid",
     height: 35,
   },
 
   result: {
     flex: 1,
-    marginBottom: 15,
+    marginBottom: 3,
     width: "100%",
     minHeight: 120,
-    border: "solid",
     justifyContent: "flex-end",
     marginTop: 15,
   },
